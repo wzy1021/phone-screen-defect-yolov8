@@ -34,3 +34,8 @@ week11-14/train/runs_mix/
 
 # 备份模型
 week11-14/models/best_v1.pt
+
+# week15-18 自检产物
+week15-18/docs/_preview/
+week15-18/docs/_qa.txt
+week15-18/docs/__pycache__/
