@@ -6,13 +6,17 @@
 
 一个面向手机屏幕外观质检工位的**半自动 AI 辅助检测原型**：上传屏幕照片，自动检出划痕、裂纹、亮点、暗点、污渍、边缘崩缺，给出类别、位置、置信度和 OK/NG 提示，并保存检测记录、支持历史查询和统计。
 
+**在线站点**：https://wzy1021.github.io/phone-screen-defect-yolov8/
+**在线演示**：https://wzy1021.github.io/phone-screen-defect-yolov8/demo.html
+**GitHub 仓库**：https://github.com/wzy1021/phone-screen-defect-yolov8
+
 ![检测结果页](site/assets/result.png)
 
 ## 在线预览
 
-- 静态展示站：[`site/index.html`](site/index.html)（功能介绍、界面截图、真实案例、技术方案）
-- 交互演示：[`site/demo.html`](site/demo.html)（选择样张，回放真实系统预生成的检测结果）
-- 部署到 GitHub Pages：[`PUBLISH.md`](PUBLISH.md)
+- 首页：https://wzy1021.github.io/phone-screen-defect-yolov8/
+- 交互演示：https://wzy1021.github.io/phone-screen-defect-yolov8/demo.html
+- 静态站源码：[`site/`](site/)；部署步骤见 [`PUBLISH.md`](PUBLISH.md)
 
 > GitHub Pages 只能托管静态页面，跑不了 Flask + YOLOv8。在线演示里的检测结果是预生成的，不是浏览器实时推理；完整系统请在本机运行。
 
