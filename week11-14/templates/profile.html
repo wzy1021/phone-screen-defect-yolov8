@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}个人资料{% endblock %}
+{% block page_title %}个人资料{% endblock %}
+{% block page_sub %}修改昵称和头像，查看自己的使用情况{% endblock %}
+
+{% block content %}
+<div class="profile-grid">
+  <section class="card profile-avatar-card">
+    <div class="card-head"><h2>头像</h2><span class="badge-soft">200 × 200</span></div>
+    <div class="card-body">
+      <div class="avatar-stage">
+        {% if current_user.avatar %}
+        <img id="avatarPreview" class="avatar-big avatar-img" src="{{ url_for('static', filename=current_user.avatar) }}" alt="头像">
+        {% else %}
+        <div id="avatarPreview" class="avatar-big">{{ (current_user.nickname or current_user.username)[0]|upper }}</div>
+        {% endif %}
+      </div>
+      <input type="file" id="avatarInput" accept="image/jpeg,image/png,image/bmp,image/webp" hidden>
+      <button class="btn-ghost w-100" id="chooseAvatar" type="button">选择图片</button>
+      <button class="btn-ghost w-100" id="resetAvatar" type="button">恢复默认头像</button>
+      <div class="conf-hint">支持 JPG / PNG / BMP / WEBP，不超过 2MB，系统会自动裁成正方形。</div>
+    </div>
+  </section>
+
+  <div class="stack">
+    <section class="card">
+      <div class="card-head"><h2>基本信息</h2><span class="badge-soft">{{ '管理员' if current_user.role == 'admin' else '普通用户' }}</span></div>
+      <div class="card-body">
+        <div class="param-row"><span>用户名</span><b>{{ current_user.username }}</b></div>
+        <div class="param-row"><span>角色</span><b>{{ '管理员（可看全部用户和记录）' if current_user.role == 'admin' else '普通用户（只能看自己的记录）' }}</b></div>
+        <div class="param-row"><span>注册时间</span><b>{{ current_user.created_at }}</b></div>
+        <div class="param-row"><span>累计检测</span><b>{{ summary.records }} 次 · {{ summary.defects }} 个缺陷</b></div>
+        <div class="param-row"><span>最近检测</span><b>{{ summary.last_at or '还没有检测记录' }}</b></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>修改昵称</h2><span class="badge-soft">2–16 位</span></div>
+      <div class="card-body">
+        <div class="field">
+          <label for="nickname">昵称</label>
+          <div class="input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"></path></svg>
+            <input id="nickname" type="text" maxlength="16" value="{{ current_user.nickname or current_user.username }}"
+                   placeholder="例如：质检小王">
+          </div>
+          <div class="conf-hint">支持中文、字母、数字、下划线和空格；保存后侧边栏和用户列表会同步显示。</div>
+        </div>
+        <button class="btn-primary-custom" id="saveProfile" type="button">保存昵称</button>
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,16 @@
+{
+  "model_load_s": 7.04,
+  "api_ms": 87.7,
+  "api_min_ms": 73.6,
+  "api_max_ms": 178.4,
+  "page_ms": 3.1,
+  "page_detail": {
+    "/detect": 4.9,
+    "/history": 2.1,
+    "/stats": 2.4
+  },
+  "batch10_s": 0.88,
+  "query_ms": 2.15,
+  "records": 10,
+  "device": "GPU"
+}

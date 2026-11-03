@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}检测结果 #{{ record.id }}{% endblock %}
+{% block page_title %}检测结果{% endblock %}
+{% block page_sub %}记录 #{{ record.id }} · {{ record.created_at }}{% endblock %}
+
+{% block content %}
+<div class="result-top">
+  <a class="back-link" href="{{ url_for('views.history') }}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+    返回历史记录
+  </a>
+  <div class="result-actions">
+    {% if record.result_path %}
+    <a class="btn-ghost" href="{{ url_for('static', filename=record.result_path) }}" download="result_{{ record.id }}.jpg">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 4v10"></path><path d="M8 10l4 4 4-4"></path><path d="M4 18v2h16v-2"></path></svg>
+      下载结果图
+    </a>
+    {% endif %}
+    <a class="btn-ghost" href="/api/records/{{ record.id }}/csv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 3h9l4 4v14H6z"></path><path d="M9 13h6M9 17h6"></path></svg>
+      导出 CSV
+    </a>
+    <a class="btn-primary-custom" href="{{ url_for('views.detect') }}">再检测一张</a>
+  </div>
+</div>
+
+<div class="stat-grid stat-grid-4">
+  <div class="mini-stat">
+    <div class="mini-icon" style="--c:#ff4d4f">!</div>
+    <div><div class="mini-label">检出缺陷</div><div class="mini-value">{{ record.total }} <small>处</small></div></div>
+  </div>
+  <div class="mini-stat">
+    <div class="mini-icon" style="--c:#2f6bff">⏱</div>
+    <div><div class="mini-label">检测耗时</div><div class="mini-value">{{ record.cost_ms }} <small>ms</small></div></div>
+  </div>
+  <div class="mini-stat">
+    <div class="mini-icon" style="--c:#13c2c2">◎</div>
+    <div><div class="mini-label">置信度阈值</div><div class="mini-value">{{ '%.2f'|format(record.conf) }}</div></div>
+  </div>
+  <div class="mini-stat">
+    <div class="mini-icon" style="--c:#52c41a">✓</div>
+    <div><div class="mini-label">检测状态</div><div class="mini-value" style="font-size:20px">{{ '完成' if record.status == 'done' else '失败' }}</div></div>
+  </div>
+</div>
+
+<div class="result-grid">
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <h2>标注结果</h2>
+        <p class="muted">{{ record.image_path.split('/')[-1] }}</p>
+      </div>
+      <span class="badge-soft {{ 'badge-green' if record.total == 0 else 'badge-red' }}">
+        {{ '未发现缺陷' if record.total == 0 else '发现 %d 处缺陷'|format(record.total) }}
+      </span>
+    </div>
+    <div class="card-body">
+      <div class="image-stage">
+        {% if record.result_path %}
+        <img src="{{ url_for('static', filename=record.result_path) }}" alt="检测结果图">
+        {% else %}
+        <img src="{{ url_for('static', filename=record.image_path) }}" alt="原始图片">
+        {% endif %}
+      </div>
+      <div class="image-caption">结果图由检测模块自动绘制，框上方为缺陷类别与置信度</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <h2>缺陷明细</h2>
+      <span class="badge-soft">{{ record.total }} 条</span>
+    </div>
+    <div class="card-body">
+      {% if record.defects %}
+      <div class="defect-list">
+        {% for d in record.defects %}
+        <div class="defect-item" style="--c: {{ d.color }}">
+          <div class="defect-dot"></div>
+          <div class="defect-main">
+            <div class="defect-title"><b>{{ d.class_cn }}</b><span>{{ d.class_name }}</span></div>
+            <div class="defect-meta">中心 ({{ '%.1f'|format(d.x * 100) }}%, {{ '%.1f'|format(d.y * 100) }}%) · 宽高 {{ '%.1f'|format(d.w * 100) }}% × {{ '%.1f'|format(d.h * 100) }}%</div>
+          </div>
+          <div class="defect-conf">
+            <b>{{ '%.1f'|format(d.conf * 100) }}%</b>
+            <div class="conf-bar"><span style="width: {{ d.conf * 100 }}%"></span></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="empty-state">
+        <div class="empty-icon">✓</div>
+        <div class="empty-title">未发现缺陷</div>
+        <p>这张图片没有检出高于阈值的缺陷。可以适当降低置信度阈值再试一次。</p>
+      </div>
+      {% endif %}
+
+      {% if record.defects %}
+      <div class="class-summary">
+        {% for c in classes %}{% if record.class_counts.get(c.id) %}
+        <span class="summary-chip" style="--c: {{ c.color }}">{{ c.cn }} × {{ record.class_counts[c.id] }}</span>
+        {% endif %}{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </section>
+</div>
+{% endblock %}

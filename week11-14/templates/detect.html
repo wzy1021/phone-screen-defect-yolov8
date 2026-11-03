@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}检测中心{% endblock %}
+{% block page_title %}检测中心{% endblock %}
+{% block page_sub %}上传手机屏幕照片，自动定位外观缺陷{% endblock %}
+
+{% block content %}
+<div class="detect-grid">
+  <div class="stack">
+    <section class="card">
+      <div class="card-head">
+        <div>
+          <h2>上传屏幕照片</h2>
+          <p class="muted">支持 JPG / PNG / BMP / WEBP，单张不超过 20MB</p>
+        </div>
+        <span class="badge-soft badge-blue">可多选</span>
+      </div>
+      <div class="card-body">
+        <div class="dropzone" id="dropzone" tabindex="0">
+          <div class="dz-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 16V4"></path><path d="M7 9l5-5 5 5"></path>
+              <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>
+            </svg>
+          </div>
+          <div class="dz-title">拖拽图片到这里，或 <span>点击选择</span></div>
+          <div class="dz-sub">请上传原始照片，不要上传带检测框的结果图；建议镜头正对屏幕拍摄</div>
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/bmp,image/webp" multiple hidden>
+        </div>
+
+        <div class="preview-list" id="previewList"></div>
+
+        <div class="detect-actions">
+          <div class="conf-control">
+            <div class="conf-label"><span>置信度阈值</span><b id="confValue">{{ '%.2f'|format(conf) }}</b></div>
+            <input type="range" id="confRange" min="0.05" max="0.9" step="0.05" value="{{ conf }}">
+            <div class="conf-hint">阈值越低检出越多，也更容易误检</div>
+            <label class="check-line">
+              <input type="checkbox" id="roiToggle" checked>
+              屏幕区域聚焦（先找手机屏幕再检测，减少背景反光/水花误检）
+            </label>
+          </div>
+          <button class="btn-primary-custom" id="detectBtn" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+            开始检测
+          </button>
+        </div>
+
+        <div class="progress-box" id="progressBox" hidden>
+          <div class="progress-text" id="progressText">正在检测…</div>
+          <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>最近检测</h2>
+        <a class="link" href="{{ url_for('views.history') }}">全部记录 →</a>
+      </div>
+      <div class="card-body" id="recentList">
+        <div class="empty-mini">正在加载…</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="stack">
+    <section class="card">
+      <div class="card-head">
+        <h2>检测参数</h2>
+        <span class="badge-soft">{{ '管理员' if current_user.role == 'admin' else '只读' }}</span>
+      </div>
+      <div class="card-body">
+        <div class="param-row"><span>检测模型</span><b>YOLOv8n</b></div>
+        <div class="param-row"><span>缺陷类别</span><b>6 类</b></div>
+        <div class="param-row"><span>输入尺寸</span><b>640 × 640</b></div>
+        <div class="param-row"><span>IOU 阈值</span><b id="iouValue">{{ '%.2f'|format(iou) }}</b></div>
+        <div class="param-row"><span>推理设备</span><b id="deviceValue">自动选择</b></div>
+        {% if current_user.role == 'admin' %}
+        <button class="btn-ghost w-100" id="saveDefaultBtn" type="button">把当前置信度设为默认</button>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>拍摄建议</h2></div>
+      <div class="card-body tips">
+        <div class="tip-item"><span>01</span><p>镜头正对屏幕，避免斜拍造成透视变形</p></div>
+        <div class="tip-item"><span>02</span><p>尽量避开强烈的反射光斑，或调整拍摄角度</p></div>
+        <div class="tip-item"><span>03</span><p>亮屏、息屏各拍一张，暗点和划痕更明显</p></div>
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/detect.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,70 @@
+{
+  "model": "best.pt",
+  "train_seconds": 671.2,
+  "epochs": 60,
+  "imgsz": 640,
+  "batch": 24,
+  "dataset": "C:\\Users\\wzy06\\Desktop\\基于YOLOv8的手机屏幕外观缺陷智能检测系统\\week11-14\\datasets\\data.yaml",
+  "test": {
+    "precision": 0.9833,
+    "recall": 0.9879,
+    "map50": 0.9932,
+    "map50_95": 0.8167
+  },
+  "per_class": [
+    {
+      "class_id": 0,
+      "class_name": "scratch",
+      "precision": 0.9745,
+      "recall": 0.9806,
+      "map50": 0.988,
+      "map50_95": 0.768
+    },
+    {
+      "class_id": 1,
+      "class_name": "crack",
+      "precision": 0.981,
+      "recall": 1.0,
+      "map50": 0.995,
+      "map50_95": 0.7989
+    },
+    {
+      "class_id": 2,
+      "class_name": "bright_spot",
+      "precision": 0.9723,
+      "recall": 1.0,
+      "map50": 0.993,
+      "map50_95": 0.8196
+    },
+    {
+      "class_id": 3,
+      "class_name": "dark_spot",
+      "precision": 1.0,
+      "recall": 0.9504,
+      "map50": 0.995,
+      "map50_95": 0.8574
+    },
+    {
+      "class_id": 4,
+      "class_name": "stain",
+      "precision": 1.0,
+      "recall": 0.9966,
+      "map50": 0.995,
+      "map50_95": 0.8187
+    },
+    {
+      "class_id": 5,
+      "class_name": "edge_chip",
+      "precision": 0.9721,
+      "recall": 1.0,
+      "map50": 0.9933,
+      "map50_95": 0.8377
+    }
+  ],
+  "speed_ms": {
+    "preprocess": 1.35,
+    "inference": 3.03,
+    "loss": 0.01,
+    "postprocess": 1.68
+  }
+}

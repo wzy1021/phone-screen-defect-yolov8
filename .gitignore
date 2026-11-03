@@ -1,0 +1,36 @@
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+.venv*/
+.tmp/
+.dsh-office-*/
+.acl-reports/
+*.log
+.env
+
+# 运行时数据，不进仓库
+data.db
+week11-14/static/uploads/*
+week11-14/static/results/*
+week11-14/static/avatars/*
+!week11-14/static/uploads/.gitkeep
+!week11-14/static/results/.gitkeep
+!week11-14/static/avatars/.gitkeep
+
+# 数据集图片/标签很大，只保留生成脚本
+week11-14/datasets/images/
+week11-14/datasets/labels/
+week11-14/datasets/data.yaml
+week11-14/datasets/dataset_stats.json
+week11-14/datasets/_demo/
+week11-14/datasets_hard/
+week11-14/datasets_mix/
+
+# 训练过程产物
+week11-14/train/runs/
+week11-14/train/runs_hard/
+week11-14/train/runs_mix/
+
+# 备份模型
+week11-14/models/best_v1.pt

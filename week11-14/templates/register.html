@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}注册{% endblock %}
+
+{% block auth_content %}
+<div class="login-page">
+  <section class="login-hero">
+    <div class="hero-brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="2.5" width="12" height="19" rx="3"></rect>
+          <path d="M10 5.5h4"></path>
+          <path d="M8 15l3-3 2 2 3-4"></path>
+        </svg>
+      </div>
+      <span>ScreenGuard · 屏幕质检</span>
+    </div>
+
+    <h2>让每一块屏幕<br>都通过同样的标准</h2>
+    <p class="hero-desc">基于 YOLOv8 的手机屏幕外观缺陷智能检测系统，自动识别划痕、裂纹、亮点、暗点、污渍与边缘崩缺。</p>
+
+    <ul class="hero-points">
+      <li><i></i>注册后即可使用检测、历史记录和统计功能</li>
+      <li><i></i>每个账号只能看到自己的检测记录</li>
+      <li><i></i>管理员账号由系统初始化，不开放注册</li>
+    </ul>
+
+    <div class="hero-phone" aria-hidden="true">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <span class="phone-notch"></span>
+          <span class="scan-line"></span>
+          <span class="defect-box b1"><em>划痕 0.92</em></span>
+          <span class="defect-box b2"><em>亮点 0.88</em></span>
+          <span class="defect-box b3"><em>裂纹 0.95</em></span>
+        </div>
+      </div>
+      <div class="hero-glow"></div>
+    </div>
+
+    <div class="hero-foot">北邮人工智能学院 · 课程设计 · 2026</div>
+  </section>
+
+  <section class="login-panel">
+    <div class="login-card">
+      <div class="login-logo">SG</div>
+      <h1>创建账号</h1>
+      <p class="login-sub">注册后即可上传图片、查看检测记录</p>
+
+      {% if error %}
+      <div class="alert-error">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16h.01"></path></svg>
+        {{ error }}
+      </div>
+      {% endif %}
+
+      <form method="post" action="{{ url_for('views.register') }}" autocomplete="on">
+        <div class="field">
+          <label for="username">用户名</label>
+          <div class="input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"></path></svg>
+            <input id="username" name="username" type="text" placeholder="2–20 位中文、字母、数字或下划线"
+                   value="{{ form.username }}" required autofocus maxlength="20">
+          </div>
+        </div>
+        <div class="field">
+          <label for="password">密码</label>
+          <div class="input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+            <input id="password" name="password" type="password" placeholder="至少 6 位" required minlength="6" maxlength="64">
+          </div>
+        </div>
+        <div class="field">
+          <label for="confirm">确认密码</label>
+          <div class="input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="10" width="16" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path></svg>
+            <input id="confirm" name="confirm" type="password" placeholder="再输入一次密码" required minlength="6" maxlength="64">
+          </div>
+        </div>
+        <button type="submit" class="btn-primary-custom btn-login">注 册</button>
+      </form>
+
+      <div class="auth-link">
+        已经有账号？<a href="{{ url_for('views.login') }}">返回登录</a>
+      </div>
+    </div>
+    <div class="login-foot">基于 YOLOv8 + Flask + SQLite</div>
+  </section>
+</div>
+{% endblock %}

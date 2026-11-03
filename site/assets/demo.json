@@ -1,0 +1,135 @@
+[
+  {
+    "id": 46,
+    "name": "样张 A",
+    "original": "assets/demo/demo1_orig.jpg",
+    "result": "assets/demo/demo1_res.jpg",
+    "total": 3,
+    "conf": 0.25,
+    "cost_ms": 16,
+    "defects": [
+      {
+        "class_name": "dark_spot",
+        "conf": 0.9061,
+        "x": 0.428902,
+        "y": 0.436078,
+        "w": 0.052177,
+        "h": 0.057163,
+        "class_cn": "暗点"
+      },
+      {
+        "class_name": "dark_spot",
+        "conf": 0.848,
+        "x": 0.585247,
+        "y": 0.668801,
+        "w": 0.029039,
+        "h": 0.029022,
+        "class_cn": "暗点"
+      },
+      {
+        "class_name": "scratch",
+        "conf": 0.6782,
+        "x": 0.630019,
+        "y": 0.751239,
+        "w": 0.127945,
+        "h": 0.041917,
+        "class_cn": "划痕"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "name": "样张 B",
+    "original": "assets/demo/demo2_orig.jpg",
+    "result": "assets/demo/demo2_res.jpg",
+    "total": 3,
+    "conf": 0.25,
+    "cost_ms": 16,
+    "defects": [
+      {
+        "class_name": "bright_spot",
+        "conf": 0.8996,
+        "x": 0.434195,
+        "y": 0.340358,
+        "w": 0.043846,
+        "h": 0.042008,
+        "class_cn": "亮点"
+      },
+      {
+        "class_name": "bright_spot",
+        "conf": 0.8752,
+        "x": 0.499356,
+        "y": 0.521559,
+        "w": 0.022999,
+        "h": 0.023323,
+        "class_cn": "亮点"
+      },
+      {
+        "class_name": "scratch",
+        "conf": 0.8124,
+        "x": 0.372919,
+        "y": 0.233332,
+        "w": 0.039312,
+        "h": 0.078051,
+        "class_cn": "划痕"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "name": "样张 C",
+    "original": "assets/demo/demo3_orig.jpg",
+    "result": "assets/demo/demo3_res.jpg",
+    "total": 4,
+    "conf": 0.25,
+    "cost_ms": 15,
+    "defects": [
+      {
+        "class_name": "crack",
+        "conf": 0.8717,
+        "x": 0.574218,
+        "y": 0.552615,
+        "w": 0.068038,
+        "h": 0.075749,
+        "class_cn": "裂纹"
+      },
+      {
+        "class_name": "bright_spot",
+        "conf": 0.8596,
+        "x": 0.385092,
+        "y": 0.786652,
+        "w": 0.037098,
+        "h": 0.042871,
+        "class_cn": "亮点"
+      },
+      {
+        "class_name": "crack",
+        "conf": 0.813,
+        "x": 0.628279,
+        "y": 0.444541,
+        "w": 0.073464,
+        "h": 0.075531,
+        "class_cn": "裂纹"
+      },
+      {
+        "class_name": "dark_spot",
+        "conf": 0.8032,
+        "x": 0.511786,
+        "y": 0.661405,
+        "w": 0.025483,
+        "h": 0.025941,
+        "class_cn": "暗点"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "name": "样张 D",
+    "original": "assets/demo/demo4_orig.jpg",
+    "result": "assets/demo/demo4_res.jpg",
+    "total": 0,
+    "conf": 0.25,
+    "cost_ms": 13,
+    "defects": []
+  }
+]

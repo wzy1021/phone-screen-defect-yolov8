@@ -1,0 +1,5 @@
+﻿{
+  "v1": {"v1_map50": 0.9932, "hard_map50": 0.259, "real_boxes": 26, "real_cracks": 2},
+  "v2": {"v1_map50": 0.542, "hard_map50": 0.8963, "real_boxes": 8, "real_cracks": 3},
+  "mix": {"v1_map50": 0.9875, "hard_map50": 0.8883, "real_boxes": 3, "real_cracks": 1}
+}

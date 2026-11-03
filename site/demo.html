@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>在线演示 · ScreenGuard</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="demo-body">
+<header class="site-header">
+  <a class="logo" href="index.html">
+    <span class="logo-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="2.5" width="12" height="19" rx="3"></rect>
+        <path d="M10 5.5h4"></path><path d="M8 15l3-3 2 2 3-4"></path>
+      </svg>
+    </span>
+    <span><b>ScreenGuard</b><small>屏幕缺陷检测</small></span>
+  </a>
+  <nav class="site-nav">
+    <a href="index.html">首页</a>
+    <a href="index.html#features">功能</a>
+    <a href="index.html#tech">技术方案</a>
+    <a href="demo.html" class="nav-cta">在线演示</a>
+  </nav>
+</header>
+
+<main class="demo-page">
+  <div class="demo-head">
+    <div>
+      <span class="tag">交互演示</span>
+      <h1>检测工作台</h1>
+      <p>选择一张样张，点击“开始检测”，查看预生成的检测结果。</p>
+    </div>
+    <div class="notice">静态演示：结果为真实系统预生成，非浏览器内实时推理。</div>
+  </div>
+
+  <div class="demo-layout">
+    <aside class="demo-samples">
+      <h2>样张</h2>
+      <div id="sampleList" class="sample-list"><div class="empty-mini">加载中…</div></div>
+      <div class="demo-tip">
+        <b>说明</b>
+        <p>样张来自系统的合成测试集，已包含检测结果；真实照片请在本机运行系统后上传。</p>
+      </div>
+    </aside>
+
+    <section class="demo-main">
+      <div class="demo-toolbar">
+        <div class="toolbar-left">
+          <button class="btn btn-primary btn-sm" id="detectBtn" disabled>开始检测</button>
+          <button class="btn btn-ghost btn-sm" id="resetBtn" disabled>重置</button>
+        </div>
+        <div class="view-toggle" id="viewToggle" hidden>
+          <button data-view="original" class="active">原图</button>
+          <button data-view="result">结果图</button>
+        </div>
+      </div>
+
+      <div class="demo-stage" id="stage">
+        <div class="stage-empty" id="stageEmpty">选择左侧样张开始</div>
+        <img id="stageImg" alt="检测图片" hidden>
+        <div class="scan-overlay" id="scanOverlay" hidden><span></span></div>
+        <div class="progress-box demo-progress" id="progressBox" hidden>
+          <div class="progress-text" id="progressText">正在检测…</div>
+          <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+        </div>
+      </div>
+
+      <div class="demo-result" id="resultArea" hidden>
+        <div class="mini-stats">
+          <div><span>检出缺陷</span><b id="dTotal">0<small> 处</small></b></div>
+          <div><span>耗时</span><b id="dCost">0<small> ms</small></b></div>
+          <div><span>置信度阈值</span><b id="dConf">0.25</b></div>
+          <div><span>状态</span><b id="dStatus">完成</b></div>
+        </div>
+        <div class="demo-defects">
+          <h2>缺陷明细</h2>
+          <div id="defectList"><div class="empty-mini">暂无</div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><b>ScreenGuard</b><p>静态演示站 · 完整检测需本地运行 Flask + YOLOv8</p></div>
+    <div class="footer-links"><a href="index.html">返回首页</a><a href="index.html#start">本地运行</a></div>
+  </div>
+</footer>
+<script src="assets/demo.js"></script>
+</body>
+</html>
+

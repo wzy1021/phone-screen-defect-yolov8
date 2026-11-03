@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}用户管理{% endblock %}
+{% block page_title %}用户管理{% endblock %}
+{% block page_sub %}查看所有注册用户和他们的检测情况{% endblock %}
+
+{% block content %}
+<section class="card filter-card">
+  <div class="card-body">
+    <div class="filter-row">
+      <div class="filter-item" style="flex:1;max-width:320px">
+        <label>搜索用户</label>
+        <input type="text" id="userSearch" placeholder="输入用户名或昵称">
+      </div>
+      <div class="filter-summary" id="userSummary">加载中…</div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <div>
+      <h2>注册用户</h2>
+      <p class="muted">管理员可以看到所有用户；普通用户只能看到自己</p>
+    </div>
+    <span class="badge-soft" id="userCount">0 人</span>
+  </div>
+  <div class="card-body table-wrap">
+    <table class="table-modern">
+      <thead>
+        <tr>
+          <th>用户</th>
+          <th>角色</th>
+          <th>注册时间</th>
+          <th>检测次数</th>
+          <th>缺陷数</th>
+          <th>最近检测</th>
+          <th style="width:100px">操作</th>
+        </tr>
+      </thead>
+      <tbody id="userBody">
+        <tr><td colspan="7"><div class="empty-mini">正在加载…</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/admin_users.js') }}"></script>
+{% endblock %}

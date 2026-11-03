@@ -1,0 +1,31 @@
+test_admin_user_list_permission ... ok
+test_api_requires_login ... ok
+test_avatar_upload_and_reset ... ok
+test_csv_export ... ok
+test_delete_record_removes_files ... ok
+test_detect_creates_record_and_result ... ok
+test_invalid_conf ... ok
+test_login_success_and_me ... ok
+test_login_wrong_password ... ok
+test_page_redirects_to_login ... ok
+test_pagination ... ok
+test_profile_nickname ... ok
+test_register_page ... ok
+test_register_success_and_login ... ok
+test_register_validation ... ok
+test_settings_permission_and_validation ... ok
+test_upload_and_reject_bad_file ... ok
+test_user_cannot_read_admin_record ... ok
+test_all_classes_have_enough_samples ... ok
+test_data_yaml ... ok
+test_every_image_has_label ... ok
+test_image_size ... ok
+test_label_files_valid ... ok
+test_split_counts ... ok
+test_confidence_threshold_effective ... ok
+test_detect_returns_boxes ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 6.258s
+
+OK

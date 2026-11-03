@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}历史记录{% endblock %}
+{% block page_title %}历史记录{% endblock %}
+{% block page_sub %}查看、筛选和删除以往的检测记录{% endblock %}
+
+{% block content %}
+<section class="card filter-card">
+  <div class="card-body">
+    <div class="filter-row">
+      <div class="filter-item">
+        <label>开始日期</label>
+        <input type="date" id="startDate">
+      </div>
+      <div class="filter-item">
+        <label>结束日期</label>
+        <input type="date" id="endDate">
+      </div>
+      <div class="filter-item">
+        <label>缺陷情况</label>
+        <select id="hasDefect">
+          <option value="">全部记录</option>
+          <option value="1">有缺陷</option>
+          <option value="0">无缺陷</option>
+        </select>
+      </div>
+      {% if current_user.role == 'admin' %}
+      <div class="filter-item">
+        <label>用户</label>
+        <select id="userFilter">
+          <option value="">全部用户</option>
+          {% for u in users %}
+          <option value="{{ u.id }}" {{ 'selected' if selected_user == u.id else '' }}>{{ u.nickname }}（{{ u.username }}）</option>
+          {% endfor %}
+        </select>
+      </div>
+      {% endif %}
+      <button class="btn-primary-custom btn-sm" id="searchBtn">查询</button>
+      <button class="btn-ghost btn-sm" id="resetBtn">重置</button>
+      <div class="filter-summary" id="filterSummary"></div>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <div>
+      <h2>检测记录</h2>
+      <p class="muted">共 <b id="totalCount">0</b> 条记录</p>
+    </div>
+    <span class="badge-soft" id="pageInfo">第 1 页</span>
+  </div>
+  <div class="card-body table-wrap">
+    <table class="table-modern">
+      <thead>
+        <tr>
+          <th style="width:72px">编号</th>
+          <th style="width:88px">图片</th>
+          <th>检测时间</th>
+          <th>缺陷数</th>
+          <th>耗时</th>
+          <th>阈值</th>
+          <th style="width:130px">操作</th>
+        </tr>
+      </thead>
+      <tbody id="recordBody">
+        <tr><td colspan="7"><div class="empty-mini">正在加载…</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-foot pager" id="pager"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}
